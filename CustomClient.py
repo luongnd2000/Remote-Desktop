@@ -92,6 +92,8 @@ class Dekstop(QMainWindow):
             if data.decode('utf-8')=='connected':
                 print("have new connect")
                 self.label_connected.setText("Connect status : Have connection")
+                self.desktopShow.show()
+                self.hide()
                 self.Control()
             else:
                 print("not connect")
@@ -166,22 +168,23 @@ class Dekstop(QMainWindow):
         self.setFixedSize(self.width(), self.height())
         self.setWindowTitle("Remote Desktop: ")
         #
-        self.label_name = QLabel('Your id : '+self.MyID, self)
+        self.label_name = QLabel('Your UID : '+self.MyID, self)
+        self.label_name.move(10,20)
         #
         self.btn = QPushButton(self)
-        self.btn.move(0, 60)
-        self.btn.resize(390, 30)
+        self.btn.move(10, 110)
+        self.btn.resize(350, 30)
         self.btn.setText("Connect")
         self.btn.clicked.connect(self.ConnectUser)
         #
         self.ip = QLineEdit(self)
-        self.ip.move(0, 30)
-        self.ip.resize(390, 20)
-        self.ip.setPlaceholderText("Enter UID to start Remote")
+        self.ip.move(10, 70)
+        self.ip.resize(350, 20)
+        self.ip.setPlaceholderText("Enter partner UID to start Remote")
         #
         self.label_connected = QLabel('Connect status : none', self)
-        self.label_connected.resize(250, 20)
-        self.label_connected.move(0, 90)
+        self.label_connected.resize(350, 20)
+        self.label_connected.move(10, 150)
 
 class DekstopDisplay(QMainWindow):
     def __init__(self):
@@ -209,7 +212,7 @@ if __name__ == '__main__':
     thread2.start()
     app = QApplication(sys.argv)
     desktop = DekstopDisplay()
-    desktop.show()
+    desktop.hide()
     desktopremote=Dekstop(desktop)
     desktopremote.show()
     sys.exit(app.exec())
