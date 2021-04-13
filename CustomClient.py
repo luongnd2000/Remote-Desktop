@@ -33,6 +33,7 @@ class myThread (threading.Thread):
        global mouse_click
        state_left = win32api.GetKeyState(0x01)  # Left button down = 0 or 1. Button up = -127 or -128
        state_right = win32api.GetKeyState(0x02)  # Right button down = 0 or 1. Button up = -127 or -128
+
        while True:
            a = win32api.GetKeyState(0x01)
            b = win32api.GetKeyState(0x02)
@@ -93,7 +94,7 @@ class Dekstop(QMainWindow):
                 print("have new connect")
                 self.label_connected.setText("Connect status : Have connection")
                 self.desktopShow.show()
-                self.hide()
+                self.desktopShow.move(0,-25)
                 self.Control()
             else:
                 print("not connect")
@@ -189,6 +190,7 @@ class Dekstop(QMainWindow):
 class DekstopDisplay(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.setWindowFlag(Qt.FramelessWindowHint)
         self.initUI()
         self.move(0,-25)
     def ChangeImage(self,img_bytes):
